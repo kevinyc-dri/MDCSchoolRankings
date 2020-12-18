@@ -1,3 +1,5 @@
+'use strict';
+
 mapboxgl.accessToken =
   'pk.eyJ1IjoibWlhbWllZHRlY2giLCJhIjoiY2tocXh0NHMwMGViajJ4bWN5NWZxMjFqOCJ9.C44hy16LPWVJlKlX-4Ko5A';
 var map = new mapboxgl.Map({
@@ -12,7 +14,7 @@ function loadImages(callback) {
   const images = {}
   let lastError;
   colors.forEach(color => {
-    map.loadImage('/images/' + color + '-marker.png', (error, image) => {
+    map.loadImage('./images/markers/' + color + '-marker.png', (error, image) => {
       if (error) {
         lastError = error;
       }
@@ -35,8 +37,8 @@ map.on('load', function () {
       Object.keys(images).forEach(name => {
         map.addImage(name, images[name]);
       })
-      
-      fetch('/schools.json')
+
+      fetch('./data/schools.json')
         .then(function (res) {
           return res.json()
         })
@@ -198,11 +200,11 @@ map.on('click', '2019 70+%', callback);
 let toggleableLayerIds = ['2018', '2018 70+%', '2019', '2019 70+%'];
 let selectedLayerId = '2019A';
 let toggleableLinks = [];
- 
+
 // set up the corresponding toggle button for each layer
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
- 
+
     var link = document.createElement('a');
     link.href = '#';
     link.className = '';
@@ -211,14 +213,14 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
       link.className = 'active';
     }
     toggleableLinks.push(link);
-    
+
     link.onclick = function (e) {
         var clickedLayer = this.textContent;
         e.preventDefault();
         e.stopPropagation();
-      
+
         var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-        
+
         // toggle layer visibility by changing the layout object's visibility property
         const selectedLink = this;
         toggleableLinks.forEach(link => {
@@ -228,7 +230,7 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
           map.setLayoutProperty(link.textContent, 'visibility', isSelected ? 'visible' : 'none');
         });
     };
-    
+
     var layers = document.getElementById('menu');
     layers.appendChild(link);
 }

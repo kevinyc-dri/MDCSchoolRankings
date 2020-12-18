@@ -1,78 +1,72 @@
 <!DOCTYPE html>
 <html>
 
+
   <head>
     <meta charset="utf-8" />
-    <title>Display a popup on hover</title>
+    <title>MDC School Rankings</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <!-- Mapbox CSS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
 
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/css/uikit.min.css" />
 
-      #menu {
-        background: #fff;
-        position: absolute;
-        z-index: 1;
-        top: 10px;
-        right: 10px;
-        border-radius: 3px;
-        width: 120px;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        font-family: 'Open Sans', sans-serif;
-    }
-
-    #menu a {
-        font-size: 13px;
-        color: #404040;
-        display: block;
-        margin: 0;
-        padding: 10px;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        text-align: center;
-    }
-
-    #menu a:last-child {
-        border: none;
-    }
-
-    #menu a:hover {
-        background-color: #f8f8f8;
-        color: #404040;
-    }
-
-    #menu a.active {
-        background-color: #3887be;
-        color: #ffffff;
-    }
-
-    #menu a.active:hover {
-        background: #3074a4;
-    }
-    </style>
+    <!-- Personal CSS -->
+    <link rel="stylesheet" href="./styles/mapbox.css">
+    <link rel="stylesheet" href="./styles/filter.css">
   </head>
 
+
+
+
   <body>
-    <style>
-      .mapboxgl-popup {
-        max-width: 400px;
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      }
-    </style>
-    <div id="map"></div>
-    <nav id="menu"></nav>
-    <script src="script.js" ></script>
+
+    <div id="app">
+      <div id="map"></div>
+
+      <nav id="menu">
+        <a id="search" href="#" @click="showSearchDrawer = !showSearchDrawer">Search</a>
+      </nav>
+
+      <div id="search-drawer" v-show="showSearchDrawer">
+        <div class="title">
+          <h5>Search</h5>
+          <div class="close" @click="showSearchDrawer = false">X</div>
+        </div>
+        <hr>
+        <form>
+          <input class="uk-input uk-form-width-medium" type="text" v-model="searchTerm" placeholder="Search a school" width="100%">
+          <button @click="filter()" class="uk-button uk-button-primary">search</button>
+        </form>
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- SCRIPTS -->
+
+
+    <!-- JQUERY 3.5.1 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- VueJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <!-- Personal JS -->
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/mapbox.js"></script>
+    <script src="./scripts/filter.js"></script>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/js/uikit-icons.min.js"></script>
+
   </body>
 
 </html>
