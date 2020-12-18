@@ -22,7 +22,7 @@ new Vue({
         }
     },
     mounted() {
-        $.getJSON('./data/schools.json', function (data){
+        $.getJSON('data/schools.json', function (data){
           this.schoolList = data;
         })
     }

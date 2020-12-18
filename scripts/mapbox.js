@@ -14,7 +14,7 @@ function loadImages(callback) {
   const images = {}
   let lastError;
   colors.forEach(color => {
-    map.loadImage('./images/markers/' + color + '-marker.png', (error, image) => {
+    map.loadImage('images/markers/' + color + '-marker.png', (error, image) => {
       if (error) {
         lastError = error;
       }
@@ -38,7 +38,7 @@ map.on('load', function () {
         map.addImage(name, images[name]);
       })
 
-      fetch('./data/schools.json')
+      fetch('data/schools.json')
         .then(function (res) {
           return res.json()
         })
