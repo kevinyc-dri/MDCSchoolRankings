@@ -1,22 +1,103 @@
 #search-drawer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 90%;
-    max-width: 400px;
-    background-color: white;
-    z-index: 2;
-    border-left: 1px solid rgba(0, 0, 0, 0.25);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 90%;
+	max-width: 400px;
+	background-color: white;
+	z-index: 2;
+	border-left: 1px solid rgba(0, 0, 0, 0.25);
+	height: 100%;
+  overflow: scroll;
 }
 
-.title {
-    display: grid;
-    grid-template-columns: 1fr 30px;
-    padding: 5px 10px;
-    font-weight: bold;
+#search-drawer .search {
+	padding: 40px 15px 10px;
+	font-size: 13px;
 }
 
-.title .close {
-    cursor: pointer;
+#search-drawer .close {
+	position: absolute;
+	cursor: pointer;
+	top: 5px;
+	right: 15px;
 }
+
+#search-drawer .filter {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+#search-drawer .uk-divider-icon {
+	margin: 3px 0;
+}
+
+#search-drawer .filter-form {
+	margin-top: 15px;
+}
+
+#search-drawer .filter-form {
+	margin-top: 15px;
+}
+
+#search-drawer #search-result {
+	border-top: 1px solid #efefef;
+}
+
+#search-result .school{
+	border-bottom: 1px solid #efefef;
+}
+
+.school .school-name {
+	padding: 10px 15px;
+	cursor: pointer;
+	font-weight: bold;
+}
+.school .school-name:hover {
+	background-color: #f1f1f1 ;
+}
+
+.school .school-details {
+	font-size: 13px;
+	background-color: #f9f9f9;
+	padding: 10px 15px;
+	display: none;
+}
+
+.ethnicity-bar {
+	background-color: #aaa;
+	height: 15px;
+	margin: 5px 0;
+}
+
+.ethnicity-bar .section {
+	height: 15px;
+	display: inline-block;
+}
+
+.ethnicity-bar .section.Black { background-color: red; }
+.ethnicity-bar .section.White { background-color: blue; }
+.ethnicity-bar .section.Hispanic { background-color: green; }
+
+.ethnicity-bar-details {
+	padding: 5px;
+	border: 1px solid #ccc;
+	background-color: white;
+	display: grid;
+	grid-template-columns: repeat( 4, 1fr );
+}
+
+.ethnicity-bar-details .info {
+	padding: 5px;
+	border-right: dashed 1px #ccc;
+	text-align: center;
+}
+.ethnicity-bar-details .info:last-child {
+	border: 0;
+}
+
+.ethnicity-bar-details .info.Black .color { color: red; margin: 3px 0; }
+.ethnicity-bar-details .info.White .color { color: blue; margin: 3px 0; }
+.ethnicity-bar-details .info.Hispanic .color { color: green; margin: 3px 0; }
+.ethnicity-bar-details .info.Other .color { color: #aaa; margin: 3px 0; }

@@ -2,49 +2,108 @@
 <html>
 
 
-  <head>
-    <meta charset="utf-8" />
-    <title>MDC School Rankings</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<head>
+	<meta charset="utf-8" />
+	<title>MDC School Rankings</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
-    <!-- Mapbox CSS -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+	<!-- Mapbox CSS -->
+	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js">
+	</script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/css/uikit.min.css" />
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/css/uikit.min.css" />
 
-    <!-- Personal CSS -->
-    <link rel="stylesheet" href="mapbox.css">
-    <link rel="stylesheet" href="filter.css">
-  </head>
-
-
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="mapbox.css">
+	<link rel="stylesheet" href="filter.css">
+</head>
 
 
-  <body>
 
-    <div id="app">
-      <div id="map"></div>
 
-      <nav id="menu">
-        <a id="search" href="#" @click="showSearchDrawer = !showSearchDrawer">Search</a>
-      </nav>
+<body>
 
-      <div id="search-drawer" v-show="showSearchDrawer">
-        <div class="title">
-          <h5>Search</h5>
-          <div class="close" @click="showSearchDrawer = false">X</div>
-        </div>
-        <hr>
-        <form>
-          <input class="uk-input uk-form-width-medium" type="text" v-model="searchTerm" placeholder="Search a school" width="100%">
-          <button @click="filter()" class="uk-button uk-button-primary">search</button>
-        </form>
-      </div>
+	<div id="app">
+		<div id="map"></div>
+
+		<nav id="menu">
+			<a id="search" href="#" @click="showSearchDrawer = !showSearchDrawer">Search</a>
+		</nav>
+
+		<div id="search-drawer" v-show="showSearchDrawer">
+			<div class="close" @click="showSearchDrawer = false">
+				<img src="https://www.flaticon.com/svg/static/icons/svg/463/463612.svg" width="20" uk-svg>
+			</div>
+
+			<div class="search">
+				<form class="uk-search uk-search-default" style="width:100%;">
+        	<span class="uk-search-icon-flip" uk-search-icon></span>
+        	<input class="uk-search-input" type="search" v-model="searchTerm" placeholder="Search...">
+				</form>
+
+				<hr class="uk-divider-icon">
+				
+				<div class="filter">
+					<a href="#" @click="showFilterForm = !showFilterForm"></a>
+					<a href="#" style="text-align: right;" @click="clearFilterList()">clear</a>
+				</div>
+
+				<div class="filter-form" v-show="showFilterForm">
+					<div class="uk-margin">
+            <select class="uk-select" id="year" v-model="filters.year">
+                <option value="" selected disabled>Choose a Year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+            </select>
+					</div>
+
+					<hr class="uk-divider-small">
+				</div>
+			</div>
+			
+			<div id="search-result">
+				<div class="school" v-for="school in schoolList" :id="school.properties.ID" :key="school.properties.ID">
+					<div class="school-name" @click="showSchoolDetails(school)">{{ school.properties.Name }}</div>
+
+					<div :id="'school_'+school.properties.ID" class="school-details">
+						<span v-for="(detail, item) in getSchoolDetails(school)" class="details" :key="item">
+							{{item}} : {{detail}} <br>
+						</span>
+
+						<div class="ethnicity-bar">
+							<div 	v-for="(detail, item) in getSchoolEthinicity(school)" 
+										:class="['section', item ]"
+										:key="item"
+										:style="{ width: detail.percentage + '%' }">
+							</div>
+						</div>
+
+						<div class="ethnicity-bar-details" :id="'ethnicity_'+school.properties.ID">
+
+							<div 	v-for="(detail, item) in getSchoolEthinicity(school)" 
+										:class="['info', item ]"
+										:key="item">
+										
+										<b>{{ item }}</b><br>
+										
+										{{ detail.percentage }}%<br>
+
+										<h4 class="color">
+											<b>{{ detail.count }}</b>
+										</h4>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
 
     </div>
-
+	</div>
 
 
 
