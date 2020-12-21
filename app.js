@@ -5,7 +5,7 @@ new Vue({
 
 	data() {
 		return {
-			showSearchDrawer: true,
+			showSearchDrawer: false,
 			showFilterForm: false,
 			searchTerm: '',
 			filters: {},
@@ -23,7 +23,7 @@ new Vue({
 
 		filterSchoolList() {
 			$('.school').hide();
-			
+
 			this.schoolList.forEach( function(school) {
 				if( school.properties.Name.toLowerCase().includes( this.searchTerm.toLowerCase() ) ){
 					$('.school#'+school.properties.ID).show();
@@ -39,6 +39,7 @@ new Vue({
 		showSchoolDetails(school) {
 			$('.school-details').hide();
 			$('.school-details#school_' + school.properties.ID).show();
+			// window.showMap( school.geometry.coordinates, 15 )
 		},
 
 		getSchoolDetails( school ) {
@@ -46,7 +47,10 @@ new Vue({
 			return {
 				Neighborhood: details.Neighborhood,
 				"Total Students": details["Total Students"],
-				"Percentage of Minority": Math.round(details["Percentage of Minority"] * 100)
+				"Percentage of Minority": (details["Percentage of Minority"] * 100).toFixed(2) + "%",
+				"Level": details["Level"],
+				"Score": details["Score"].toFixed(3),
+				"Category": details["Category"]
 			}
 		},
 

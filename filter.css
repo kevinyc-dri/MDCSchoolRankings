@@ -76,9 +76,9 @@
 	display: inline-block;
 }
 
-.ethnicity-bar .section.Black { background-color: red; }
-.ethnicity-bar .section.White { background-color: blue; }
-.ethnicity-bar .section.Hispanic { background-color: green; }
+.ethnicity-bar .section.Black { background-color: #77d991; }
+.ethnicity-bar .section.White { background-color: #5b9dd4; }
+.ethnicity-bar .section.Hispanic { background-color: #e158ed; }
 
 .ethnicity-bar-details {
 	padding: 5px;
@@ -97,7 +97,27 @@
 	border: 0;
 }
 
-.ethnicity-bar-details .info.Black .color { color: red; margin: 3px 0; }
-.ethnicity-bar-details .info.White .color { color: blue; margin: 3px 0; }
-.ethnicity-bar-details .info.Hispanic .color { color: green; margin: 3px 0; }
+.ethnicity-bar-details .info.Black .color { color: #77d991; margin: 3px 0; }
+.ethnicity-bar-details .info.White .color { color: #5b9dd4; margin: 3px 0; }
+.ethnicity-bar-details .info.Hispanic .color { color: #e158ed; margin: 3px 0; }
 .ethnicity-bar-details .info.Other .color { color: #aaa; margin: 3px 0; }
+
+.school-info {
+	display: grid;
+	grid-template-columns: 1fr 150px;
+}
+
+.school-info-grade {
+	font-size: 65px;
+	text-align: center;
+	font-weight: 700;
+	line-height: 1em;
+}
+
+.school-info-grade h4 {
+	margin: 5px 0;
+}
+
+.school-info-grade .A { color: green; }
+.school-info-grade .B { color: orange; }
+.school-info-grade .C { color: red; }
