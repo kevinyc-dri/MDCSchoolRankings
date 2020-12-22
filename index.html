@@ -33,7 +33,7 @@
 		</nav>
 
 		<div id="search-drawer" v-show="showSearchDrawer">
-			<div class="close" @click="showSearchDrawer = false">
+			<div class="close" @click="closeSearchBox()">
 				<img src="https://www.flaticon.com/svg/static/icons/svg/463/463612.svg" width="20" uk-svg>
 			</div>
 
@@ -64,7 +64,7 @@
 			</div>
 			
 			<div id="search-result">
-				<div class="school" v-for="school in schoolList" :id="school.properties.ID" :key="school.properties.ID">
+				<div class="school" v-for="school in schoolList" :id="school.properties.ID" :key="school.properties.ID" :data-location="school.geometry.coordinates">
 					<div class="school-name" @click="showSchoolDetails(school)">{{ school.properties.Name }}</div>
 
 					<div :id="'school_'+school.properties.ID" class="school-details">
@@ -117,8 +117,6 @@
 
     </div>
 	</div>
-
-
 
 
     <!-- SCRIPTS -->

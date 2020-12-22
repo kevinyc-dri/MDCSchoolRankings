@@ -36,10 +36,22 @@ new Vue({
 			this.filterList = {}
 		},
 
+		closeSearchBox() {
+			this.showSearchDrawer = false;
+			window.map.flyTo({
+				center: [-80.3, 25.7],
+				zoom: 10
+			});
+		},
+
 		showSchoolDetails(school) {
 			$('.school-details').hide();
 			$('.school-details#school_' + school.properties.ID).show();
-			// window.showMap( school.geometry.coordinates, 15 )
+			console.log("test")
+			window.map.flyTo({
+				center: school.geometry.coordinates,
+				zoom: 15
+			});
 		},
 
 		getSchoolDetails( school ) {
