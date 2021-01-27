@@ -33,7 +33,7 @@
 		</nav>
 
 		<div id="search-drawer" v-show="showSearchDrawer">
-			<div class="close" @click="showSearchDrawer = false">
+			<div class="close" @click="closeSearchBox()">
 				<img src="https://www.flaticon.com/svg/static/icons/svg/463/463612.svg" width="20" uk-svg>
 			</div>
 
@@ -64,14 +64,27 @@
 			</div>
 			
 			<div id="search-result">
-				<div class="school" v-for="school in schoolList" :id="school.properties.ID" :key="school.properties.ID">
+				<div class="school" v-for="school in schoolList" :id="school.properties.ID" :key="school.properties.ID" :data-location="school.geometry.coordinates">
 					<div class="school-name" @click="showSchoolDetails(school)">{{ school.properties.Name }}</div>
 
 					<div :id="'school_'+school.properties.ID" class="school-details">
-						<span v-for="(detail, item) in getSchoolDetails(school)" class="details" :key="item">
-							{{item}} : {{detail}} <br>
-						</span>
+						<div class="school-info">
+							<div class="school-info-list">
+								<span v-for="(detail, item) in getSchoolDetails(school)" class="details" :key="item">
+									<b>{{item}} :</b> {{detail}} <br>
+								</span>
+							</div>
+							<div class="school-info-grade">
+								<h4>Grade 2019</h4>
+								<span :class="school.properties.Grade_2019">
+									{{ school.properties.Grade_2019.replace('#N/A', 'NA') }}
+								</span>
+							</div>
+						</div>
 
+						<hr class="uk-divider-small">
+
+						<b>Demographic</b></b>
 						<div class="ethnicity-bar">
 							<div 	v-for="(detail, item) in getSchoolEthinicity(school)" 
 										:class="['section', item ]"
@@ -106,8 +119,6 @@
 	</div>
 
 
-
-
     <!-- SCRIPTS -->
 
 
@@ -120,7 +131,6 @@
     <!-- Personal JS -->
     <script src="app.js"></script>
     <script src="mapbox.js"></script>
-    <script src="filter.js"></script>
 
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.1/dist/js/uikit.min.js"></script>
